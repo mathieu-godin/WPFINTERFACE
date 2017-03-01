@@ -12,48 +12,107 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Launching_Interface
 {
-   /// <summary>
-   /// Interaction logic for NewGamePage.xaml
-   /// </summary>
-   public partial class NewGamePage : Page
-   {
-      List<string> LangueOficielleNewPage { get; set; }
-      public NewGamePage()
-      {
-         LangueOficielleNewPage = new List<string>();
-         InitializeComponent();
-         if (GererDonnees.Langue == 0) { LangueOficielleNewPage = GererDonnees.ListeFrancais; }
-         if (GererDonnees.Langue == 1) { LangueOficielleNewPage = GererDonnees.ListeAnglais; }
-         if (GererDonnees.Langue == 2) { LangueOficielleNewPage = GererDonnees.ListeEspagnol; }
-         if (GererDonnees.Langue == 3) { LangueOficielleNewPage = GererDonnees.ListeJaponais; }
+    /// <summary>
+    /// Interaction logic for NewGamePage.xaml
+    /// </summary>
+    public partial class NewGamePage : Page
+    {
+        List<string> LangueOficielleLoadPage { get; set; }
+        public NewGamePage()
+        {
+            LangueOficielleLoadPage = new List<string>();
+            InitializeComponent();
+            if (GererDonnees.Langue == 0) { LangueOficielleLoadPage = GererDonnees.ListeFrancais; }
+            if (GererDonnees.Langue == 1) { LangueOficielleLoadPage = GererDonnees.ListeAnglais; }
+            if (GererDonnees.Langue == 2) { LangueOficielleLoadPage = GererDonnees.ListeEspagnol; }
+            if (GererDonnees.Langue == 3) { LangueOficielleLoadPage = GererDonnees.ListeJaponais; }
+            tbtitre.Text = LangueOficielleLoadPage[32];
+            BackButton.Text = LangueOficielleLoadPage[0];
+        }
 
-         tbtitre.Text = LangueOficielleNewPage[1];
-         BackButton.Text = LangueOficielleNewPage[0];
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainPage());
+        }
 
-         saveA.Text = LangueOficielleNewPage[2];
-         timeA.Text = LangueOficielleNewPage[3];
-         doneA.Text = LangueOficielleNewPage[4];
+        private void Save0Button_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("F:/programmation clg/quatrième session/HyperV/HyperV/HyperV/bin/x86/Debug/HyperV.exe");
+            Application.Current.Shutdown();
+        }
 
-         saveB.Text = LangueOficielleNewPage[5];
-         timeB.Text = LangueOficielleNewPage[6];
-         doneB.Text = LangueOficielleNewPage[7];
+        private void Save1Button_Click(object sender, RoutedEventArgs e)
+        {
+            //this.NavigationService.Navigate(new GamePage());
+        }
 
-         saveC.Text = LangueOficielleNewPage[8];
-         timeC.Text = LangueOficielleNewPage[9];
-         doneC.Text = LangueOficielleNewPage[10];
-      }
+        private void Save2Button_Click(object sender, RoutedEventArgs e)
+        {
+            //this.NavigationService.Navigate(new GamePage());
+        }
 
-      private void BackButton_Click(object sender, RoutedEventArgs e)
-      {
-         this.NavigationService.Navigate(new MainPage());
-      }
+        private void Create0_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (GererDonnees.Langue == 0)
+            {
+                Create0.Source = new BitmapImage(new Uri(@"/Pictures/CreateFR.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 1)
+            {
+                Create0.Source = new BitmapImage(new Uri(@"/Pictures/Create.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 2)
+            {
+                Create0.Source = new BitmapImage(new Uri(@"/Pictures/CreateES.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 3)
+            {
+                Create0.Source = new BitmapImage(new Uri(@"/Pictures/CreateJA.png", UriKind.Relative));
+            }
+        }
 
-      private void Save1Button_Click(object sender, RoutedEventArgs e)
-      {
-         this.NavigationService.Navigate(new GamePage());
-      }
-   }
+        private void Create1_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (GererDonnees.Langue == 0)
+            {
+                Create1.Source = new BitmapImage(new Uri(@"/Pictures/CreateFR.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 1)
+            {
+                Create1.Source = new BitmapImage(new Uri(@"/Pictures/Create.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 2)
+            {
+                Create1.Source = new BitmapImage(new Uri(@"/Pictures/CreateES.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 3)
+            {
+                Create1.Source = new BitmapImage(new Uri(@"/Pictures/CreateJA.png", UriKind.Relative));
+            }
+        }
+
+        private void Create2_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (GererDonnees.Langue == 0)
+            {
+                Create2.Source = new BitmapImage(new Uri(@"/Pictures/CreateFR.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 1)
+            {
+                Create2.Source = new BitmapImage(new Uri(@"/Pictures/Create.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 2)
+            {
+                Create2.Source = new BitmapImage(new Uri(@"/Pictures/CreateES.png", UriKind.Relative));
+            }
+            else if (GererDonnees.Langue == 3)
+            {
+                Create2.Source = new BitmapImage(new Uri(@"/Pictures/CreateJA.png", UriKind.Relative));
+            }
+        }
+    }
 }
