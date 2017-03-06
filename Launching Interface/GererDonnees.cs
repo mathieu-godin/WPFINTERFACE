@@ -63,8 +63,7 @@ namespace Launching_Interface
          {
             PremierFichier = true;
          }
-         
-
+        
          ChoisirRéglages();
       }
 
@@ -134,8 +133,8 @@ namespace Launching_Interface
       static void RéglagesModifiés()
       {
          Langue = ListeInfosRecus[0];
-         RenderDistance = ListeInfosRecus[1];
-         Fps = ListeInfosRecus[2];
+         RenderDistance = ListeInfosRecus[2];
+         Fps = ListeInfosRecus[1];
          VolMusique = ListeInfosRecus[3];
          VolEffets = ListeInfosRecus[4];
          FullscreenMode = ListeInfosRecus[5];
@@ -143,8 +142,5 @@ namespace Launching_Interface
          NbNiveauxComplétés = ListeInfosRecus[7];
          Temps = new TimeSpan(ListeInfosRecus[8],ListeInfosRecus[9],0);
       }
-
-
-
    }
 }
