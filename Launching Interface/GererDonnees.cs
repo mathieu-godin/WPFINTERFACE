@@ -40,7 +40,7 @@ namespace Launching_Interface
 
       static GererDonnees()
       {
-         PremierFichier = true;
+         
 
          ListeFrancais = new List<string>();
          ListeAnglais  = new List<string>();
@@ -57,8 +57,11 @@ namespace Launching_Interface
          if (File.Exists("../../Langues/versMenu.txt"))
          {
             PremierFichier = false;
-            LireFichier("versMenu.txt");
-            
+            LireFichier("versMenu.txt");           
+         }
+         else
+         {
+            PremierFichier = true;
          }
          
 
@@ -140,5 +143,8 @@ namespace Launching_Interface
          NbNiveauxComplétés = ListeInfosRecus[7];
          Temps = new TimeSpan(ListeInfosRecus[8],ListeInfosRecus[9],0);
       }
+
+
+
    }
 }

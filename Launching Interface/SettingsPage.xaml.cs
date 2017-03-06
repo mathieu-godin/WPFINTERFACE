@@ -33,8 +33,9 @@ namespace Launching_Interface
       double VolumeMusique { get; set; }
       double VolumeEffets { get; set; }
 
-      bool choixFullscreen = false;
-      bool choixController = false;
+      WindowStyle WindowStyle { get; set; }
+      ResizeMode ResizeMode { get; set; }
+      
 
       public SettingsPage()
       {
@@ -53,7 +54,7 @@ namespace Launching_Interface
          }
          else
          {
-            ListeInfosÀEnvoyer = GererDonnees.ListeInfosRecus;
+            ListeInfosÀEnvoyer    = GererDonnees.ListeInfosRecus;
 
             ListeInfosÀEnvoyer[0] = GererDonnees.Langue;
             ListeInfosÀEnvoyer[1] = GererDonnees.Fps;
@@ -63,13 +64,7 @@ namespace Launching_Interface
             ListeInfosÀEnvoyer[5] = GererDonnees.FullscreenMode;
             ListeInfosÀEnvoyer[6] = GererDonnees.KeyboardMode;
          }
-
-
-
          InitializeComponent();
-         GérerLangues();
-         GérerFPS();
-         GérerRenderDistance();
 
          ChangerRéglages();
       }
@@ -168,30 +163,57 @@ namespace Launching_Interface
 
       private void ButFull_Unchecked(object sender, RoutedEventArgs e)
       {
-         ButFull.Content = ListeLangueOficielle[30];
          GererDonnees.FullscreenMode = 0;
-         choixFullscreen = true;      
+         if (GererDonnees.FullscreenMode == 0)
+         {
+            ButFull.Content = ListeLangueOficielle[30];
+         }
+         else if (GererDonnees.FullscreenMode == 1)
+         {
+            ButFull.Content = ListeLangueOficielle[29];
+         }
+
+         Application.Current.MainWindow.WindowState = WindowState.Normal;
+         Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+         Application.Current.MainWindow.ResizeMode  = ResizeMode.CanResize;
       }
       private void ButFull_Checked(object sender, RoutedEventArgs e)
       {
-         ButFull.Content = ListeLangueOficielle[29];
+         
          GererDonnees.FullscreenMode = 1;
          GererDonnees.PremierFichier = false;
-         choixFullscreen = true;
+
+         if (GererDonnees.FullscreenMode == 0)
+         {
+            ButFull.Content = ListeLangueOficielle[30];
+         }
+         else if (GererDonnees.FullscreenMode == 1)
+         {
+            ButFull.Content = ListeLangueOficielle[29];
+         }
+
+
+         Application.Current.MainWindow.WindowState = WindowState.Maximized;
+         Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+         Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
+         
+
+
       }
       private void ButCont_Unchecked(object sender, RoutedEventArgs e)
       {
-         ButCont.Content = ListeLangueOficielle[23];
-         GererDonnees.KeyboardMode = 1;
-         choixController = false;
          
+         GererDonnees.KeyboardMode = 0;
+         ChangerRéglages();
+
       }
       private void ButCont_Checked(object sender, RoutedEventArgs e)
       {
-         ButCont.Content = ListeLangueOficielle[22];
-         GererDonnees.KeyboardMode = 0;
+         
+         GererDonnees.KeyboardMode = 1;
          GererDonnees.PremierFichier = false;
-         choixController = true;
+         ChangerRéglages();
+
       }
 
       // Langues
@@ -227,8 +249,17 @@ namespace Launching_Interface
 
       void ChangerRéglages()
       {
-         Lang.Text = ListeLangueOficielle[31]; RBan.Content = ListeLangueOficielle[15]; RBfr.Content = ListeLangueOficielle[14];
-         RBes.Content = ListeLangueOficielle[16]; RBjp.Content = ListeLangueOficielle[17];
+         GérerLangues();
+         GérerFPS();
+         GérerRenderDistance();
+
+         Lang.Text = ListeLangueOficielle[31];
+
+         RBan.Content = ListeLangueOficielle[15];
+         RBfr.Content = ListeLangueOficielle[14];
+         RBes.Content = ListeLangueOficielle[16];
+         RBjp.Content = ListeLangueOficielle[17];
+
          SEff.Text = ListeLangueOficielle[13];
          GMus.Text = ListeLangueOficielle[12];
 
@@ -241,32 +272,66 @@ namespace Launching_Interface
          Inp.Text = ListeLangueOficielle[21];
          Full.Text = ListeLangueOficielle[20];
 
-         if (choixFullscreen == true)
+         if (GererDonnees.FullscreenMode == 1)
          {
             ButFull.Content = ListeLangueOficielle[29];
+            ButFull.IsChecked = true;
          }
-         else if (choixFullscreen == false)
+         else if (GererDonnees.FullscreenMode == 0)
          {
             ButFull.Content = ListeLangueOficielle[30];
+            ButFull.IsChecked = false;
          }
 
-         if (choixController == true)
+         if (GererDonnees.KeyboardMode == 1)
          {
             ButCont.Content = ListeLangueOficielle[22];
+            ButCont.IsChecked = true;
          }
-         else if (choixController == false)
+         else if (GererDonnees.KeyboardMode == 0)
          {
             ButCont.Content = ListeLangueOficielle[23];
+            ButCont.IsChecked = false;
          }
+
+         
 
       }
 
       void GérerLangues()
       {
-         if (GererDonnees.Langue == 0) { ListeLangueOficielle = GererDonnees.ListeFrancais; }
-         if (GererDonnees.Langue == 1) { ListeLangueOficielle = GererDonnees.ListeAnglais; }
-         if (GererDonnees.Langue == 2) { ListeLangueOficielle = GererDonnees.ListeEspagnol; }
-         if (GererDonnees.Langue == 3) { ListeLangueOficielle = GererDonnees.ListeJaponais; }
+         if (GererDonnees.Langue == 0)
+         {
+            ListeLangueOficielle = GererDonnees.ListeFrancais;
+            RBfr.IsChecked = true;
+            RBan.IsChecked = false;
+            RBes.IsChecked = false;
+            RBjp.IsChecked = false;
+         }
+         if (GererDonnees.Langue == 1)
+         {
+            ListeLangueOficielle = GererDonnees.ListeAnglais;
+            RBfr.IsChecked = false;
+            RBan.IsChecked = true;
+            RBes.IsChecked = false;
+            RBjp.IsChecked = false;
+         }
+         if (GererDonnees.Langue == 2)
+         {
+            ListeLangueOficielle = GererDonnees.ListeEspagnol;
+            RBfr.IsChecked = false;
+            RBan.IsChecked = false;
+            RBes.IsChecked = true;
+            RBjp.IsChecked = false;
+         }
+         if (GererDonnees.Langue == 3)
+         {
+            ListeLangueOficielle = GererDonnees.ListeJaponais;
+            RBfr.IsChecked = false;
+            RBan.IsChecked = false;
+            RBes.IsChecked = false;
+            RBjp.IsChecked = true;
+         }
       }
 
       #endregion
@@ -349,8 +414,12 @@ namespace Launching_Interface
       private void ResetButton_Click(object sender, RoutedEventArgs e)
       {
          GererDonnees.PremierFichier = true;
-         GererDonnees.RéglagesBase();         
+         GererDonnees.RéglagesBase();
+         ChangerRéglages();
+
       }
+
+      
 
    }
 }
