@@ -18,20 +18,14 @@ namespace Launching_Interface
    /// <summary>
    /// Interaction logic for SettingsPage.xaml
    /// </summary>
-   /// 
 
    public partial class SettingsPage : Page
    {
-     
       List<string> ListeLangueOficielle { get; set; }
       List<int> ListeInfosÀEnvoyer { get; set; }
 
       int LangueOficielle { get; set; }
-      double VolumeMusique { get; set; }
-      double VolumeEffets { get; set; }
 
-      WindowStyle WindowStyle { get; set; }
-      ResizeMode ResizeMode { get; set; }
       
 
       public SettingsPage()
@@ -46,11 +40,7 @@ namespace Launching_Interface
          GererDonnees.AAAA = true;
          GérerLangues();
          GérerRenderDistance();
-
-         
-         
-         if(PerformanceSlider.Value < 0.2) { valeurPerfo.Text = "30 FPS"; }  // temporaire
-
+         GérerSon();          
 
          ChangerRéglages();
       }
@@ -267,10 +257,19 @@ namespace Launching_Interface
          }
 
 
-         Application.Current.MainWindow.WindowState = WindowState.Maximized;
+         //Application.Current.MainWindow.WindowState = WindowState.Maximized;
+         //Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+         //Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
+
          Application.Current.MainWindow.WindowStyle = WindowStyle.None;
          Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
-         
+         Application.Current.MainWindow.Left = 0;
+         Application.Current.MainWindow.Top = 0;
+         Application.Current.MainWindow.Width = SystemParameters.VirtualScreenWidth;
+         Application.Current.MainWindow.Height = SystemParameters.VirtualScreenHeight;
+         Application.Current.MainWindow.Topmost = true;
+
+
 
 
       }
@@ -434,6 +433,7 @@ namespace Launching_Interface
          {
             PerformanceSlider.Value = 10;
          }
+         if(PerformanceSlider.Value < 0.2) { valeurPerfo.Text = "30 FPS"; }  // temporaire
       }
       void GérerRenderDistance()
       {
@@ -455,29 +455,40 @@ namespace Launching_Interface
       {
          var slider = sender as Slider;
          double value = slider.Value;
-         VolumeMusique = value;
-         musicvalue.Text = Math.Round(VolumeMusique,0).ToString();
+         GererDonnees.VolMusique = (int)Math.Round(value, 0);
+         musicvalue.Text = GererDonnees.VolMusique.ToString();
       }
 
       private void SoundEffectsSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
       {
          var slider = sender as Slider;
          double value = slider.Value;
-         VolumeEffets = value;
-         soundvalue.Text = Math.Round(VolumeEffets, 0).ToString();
+         GererDonnees.VolEffets = (int)Math.Round(value, 0);
+         soundvalue.Text = GererDonnees.VolEffets.ToString();
       }
 
       private void ResetButton_Click(object sender, RoutedEventArgs e)
       {
          GererDonnees.PremierFichier = true;
+         GererDonnees.AAAA = true;
          GererDonnees.RéglagesBase();
          ChangerRéglages();
+         GérerFPS();
+         GérerRenderDistance();
+         GérerLangues();
+         GérerSon();
 
       }
 
       private void rdvalue_TextChanged(object sender, TextChangedEventArgs e)
       {
 
+      }
+
+      void GérerSon()
+      {
+         GameMusicSlider.Value = GererDonnees.VolMusique;
+         SoundEffectsSlider.Value = GererDonnees.VolEffets;
       }
    }
 }
