@@ -31,7 +31,7 @@ namespace Launching_Interface
             if (GererDonnees.Langue == 1) { LangueOficielleLoadPage = GererDonnees.ListeAnglais; }
             if (GererDonnees.Langue == 2) { LangueOficielleLoadPage = GererDonnees.ListeEspagnol; }
             if (GererDonnees.Langue == 3) { LangueOficielleLoadPage = GererDonnees.ListeJaponais; }
-            tbtitre.Text = LangueOficielleLoadPage[32];
+            tbtitre.Text = LangueOficielleLoadPage[1];
             BackButton.Text = LangueOficielleLoadPage[0];
         }
 
