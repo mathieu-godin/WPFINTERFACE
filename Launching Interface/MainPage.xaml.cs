@@ -25,6 +25,7 @@ namespace Launching_Interface
       List<string> LangueOficielleMain { get; set; }
       public MainPage()
       {
+        
          LangueOficielleMain = new List<string>();
          InitializeComponent();
          if (GererDonnees.Langue == 0) { LangueOficielleMain = GererDonnees.ListeFrancais; }
@@ -37,6 +38,21 @@ namespace Launching_Interface
          se.Text = LangueOficielleMain[11];
          cr.Text = LangueOficielleMain[24];
          hi.Text = LangueOficielleMain[28];
+         exit.Text = LangueOficielleMain[34];
+
+
+         if(GererDonnees.FullscreenMode == 1)
+         {
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+            Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
+         }
+         else
+         {
+            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+            Application.Current.MainWindow.ResizeMode = ResizeMode.CanResize;
+         }
 
 
 
@@ -62,9 +78,12 @@ namespace Launching_Interface
 
       private void Highscores_Click(object sender, RoutedEventArgs e)
       {
-         NavigationService.Navigate(new Uri("HighscoresPage.xaml", UriKind.Relative));
+         // NavigationService.Navigate(new Uri("HighscoresPage.xaml", UriKind.Relative));     À REMETTRE
       }
 
-
+      private void Quit_Click(object sender, RoutedEventArgs e)
+      {
+         Application.Current.Shutdown();
+      }
    }
 }

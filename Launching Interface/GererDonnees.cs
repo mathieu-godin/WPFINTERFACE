@@ -13,6 +13,8 @@ namespace Launching_Interface
       const string CHEMIN_ÉCRITURE = "../../FichiersModifies/";
       const string NOM_FICHIER_ENVOI = "versXna.txt";
 
+      public static bool AAAA = true;
+
       const int LANGUE_BASE = 0; 
       const int FPS_BASE = 60;     
       const int RENDER_D_BASE = 500; 
@@ -40,7 +42,7 @@ namespace Launching_Interface
 
       static GererDonnees()
       {
-         PremierFichier = true;
+         
 
          ListeFrancais = new List<string>();
          ListeAnglais  = new List<string>();
@@ -57,11 +59,13 @@ namespace Launching_Interface
          if (File.Exists("../../Langues/versMenu.txt"))
          {
             PremierFichier = false;
-            LireFichier("versMenu.txt");
-            
+            LireFichier("versMenu.txt");           
          }
-         
-
+         else
+         {
+            PremierFichier = true;
+         }
+        
          ChoisirRéglages();
       }
 
@@ -131,8 +135,8 @@ namespace Launching_Interface
       static void RéglagesModifiés()
       {
          Langue = ListeInfosRecus[0];
-         RenderDistance = ListeInfosRecus[1];
-         Fps = ListeInfosRecus[2];
+         RenderDistance = ListeInfosRecus[2];
+         Fps = ListeInfosRecus[1];
          VolMusique = ListeInfosRecus[3];
          VolEffets = ListeInfosRecus[4];
          FullscreenMode = ListeInfosRecus[5];
