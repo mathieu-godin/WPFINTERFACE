@@ -23,7 +23,8 @@ namespace Launching_Interface
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage());
+       //   MainFrame.Navigate(new MainPage()); //      À REMETTRE
+         MainFrame.Navigate(new MenuDansJeu());
       }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)

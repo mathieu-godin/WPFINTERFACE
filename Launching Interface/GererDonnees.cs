@@ -42,8 +42,6 @@ namespace Launching_Interface
 
       static GererDonnees()
       {
-         
-
          ListeFrancais = new List<string>();
          ListeAnglais  = new List<string>();
          ListeEspagnol = new List<string>();
