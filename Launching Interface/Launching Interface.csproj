@@ -225,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pictures\Instructions\TouchesManette\" />
-    <Folder Include="Saves\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\Instructions\Controller2Sides.png" />
@@ -250,6 +249,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\Instructions\TouchesClavier\SpaceBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Saves\save.txt" />
+    <Resource Include="Saves\save0.txt" />
+    <Resource Include="Saves\save1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Saves\screenshot0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,9 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
-
-
-
+using System.Resources;
+using System.Reflection;
 
 namespace Launching_Interface
 {
@@ -43,7 +42,7 @@ namespace Launching_Interface
 
          InitializeComponent();
 
-       //  BonScreenshot();          À REMETTRE
+         BonScreenshot();
 
          GérerFPS();
          GererDonnees.AAAA = true;
@@ -524,10 +523,8 @@ namespace Launching_Interface
          string nomImage = "";
 
          StreamReader lecteurDonnées = new StreamReader("../../Saves/save.txt");
-         while (!lecteurDonnées.EndOfStream)
+         switch (lecteurDonnées.ReadLine())
          {
-            switch (lecteurDonnées.ReadLine())
-            {
                case "0":
                   nomImage = "screenshot0.png";
                   break;
@@ -537,11 +534,23 @@ namespace Launching_Interface
                case "2":
                   nomImage = "screenshot2.png";
                   break;
-            }
          }
          lecteurDonnées.Close();
-         ImageFond.Source = new BitmapImage(new Uri(@"/Pictures/Saves/" + nomImage, UriKind.Relative));
-      }
+            //ImageFond.Source = new BitmapImage(new Uri(@"Pictures/SavesScreenshots/save0.bmp", UriKind.Relative));
+            //ImageFond.Source = new BitmapImage(new Uri(@"../../Saves/" + nomImage, UriKind.Relative));
+
+            //ImageFond = new Image();
+            BitmapImage src = new BitmapImage();
+            src.BeginInit();
+            src.UriSource = new Uri(@"../../Saves/" + nomImage, UriKind.Relative);
+            src.CacheOption = BitmapCacheOption.OnLoad;
+            src.EndInit();
+            ImageFond.Source = src;
+
+            //BitmapImage src = new BitmapImage(new Uri(@"Saves/" + nomImage, UriKind.Relative));
+            //src.CacheOption = BitmapCacheOption.OnLoad;
+            //ImageFond.Source = src;
+        }
 
       private void saveButton_Click(object sender, RoutedEventArgs e)
       {
