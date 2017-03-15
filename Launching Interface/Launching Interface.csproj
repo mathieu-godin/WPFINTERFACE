@@ -224,7 +224,32 @@
     <Resource Include="Pictures\CreateJA.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Pictures\Instructions\TouchesManette\" />
     <Folder Include="Saves\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\Controller2Sides.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesClavier\WASD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesClavier\FlèchesClavier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesClavier\E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesClavier\P.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesClavier\Shift.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesClavier\SpaceBar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

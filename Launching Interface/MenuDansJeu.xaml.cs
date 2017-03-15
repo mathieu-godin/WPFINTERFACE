@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 
 
@@ -23,6 +24,7 @@ namespace Launching_Interface
    /// </summary>
    public partial class MenuDansJeu : Page
    {
+      bool EstPremiereFois { get; set; }
       List<string> ListeLangueOficielle { get; set; }
       List<int> ListeInfosÀEnvoyer { get; set; }
       
@@ -33,12 +35,15 @@ namespace Launching_Interface
       {
 
 
-
+         EstPremiereFois = true;
          ListeLangueOficielle = new List<string>();
          ListeInfosÀEnvoyer = new List<int>();
 
          AssocierListeEnvoyer();
+
          InitializeComponent();
+
+       //  BonScreenshot();          À REMETTRE
 
          GérerFPS();
          GererDonnees.AAAA = true;
@@ -92,6 +97,8 @@ namespace Launching_Interface
 
          Application.Current.Shutdown();
       }
+
+
 
       private void MusicVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
       {
@@ -262,31 +269,33 @@ namespace Launching_Interface
             ButFull.Content = ListeLangueOficielle[29];
          }
 
-
-         Application.Current.MainWindow.WindowState = WindowState.Maximized;
-         Application.Current.MainWindow.WindowStyle = WindowStyle.None;
-         Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
-         //Application.Current.MainWindow.Left = 0;
-         //Application.Current.MainWindow.Top = 0;
-         //Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-         //Application.Current.MainWindow.Width = SystemParameters.VirtualScreenWidth;
-         //Application.Current.MainWindow.Height = SystemParameters.VirtualScreenHeight;
-         //Application.Current.MainWindow.Topmost = true;
-
-
-
-
-
+         if(EstPremiereFois == true)
+         {
+            EstPremiereFois = false;
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+            Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
+         }
+         else
+         {
+            Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+            Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
+            Application.Current.MainWindow.Left = 0;
+            Application.Current.MainWindow.Top = 0;
+            Application.Current.MainWindow.Width = SystemParameters.VirtualScreenWidth;
+            Application.Current.MainWindow.Height = SystemParameters.VirtualScreenHeight;
+            Application.Current.MainWindow.Topmost = true;
+         }
       }
       private void ButCont_Unchecked(object sender, RoutedEventArgs e)
       {
-         GererDonnees.KeyboardMode = 0;
+         GererDonnees.KeyboardMode = 1;
+         
          ChangerRéglages();
       }
       private void ButCont_Checked(object sender, RoutedEventArgs e)
       {
-         GererDonnees.KeyboardMode = 1;
+         GererDonnees.KeyboardMode = 0;
          GererDonnees.PremierFichier = false;
          ChangerRéglages();
       }
@@ -344,6 +353,12 @@ namespace Launching_Interface
          Inp.Text = ListeLangueOficielle[21];
          Full.Text = ListeLangueOficielle[20];
 
+         saveText.Text = ListeLangueOficielle[37];
+         if (GererDonnees.Langue == 0) { saveText.Margin = new Thickness(29, 60, 118, 48); }
+         else { saveText.Margin = new Thickness(40,64,118,48); }
+
+         menuText.Text = ListeLangueOficielle[36];
+
          if (GererDonnees.FullscreenMode == 1)
          {
             ButFull.Content = ListeLangueOficielle[29];
@@ -357,17 +372,16 @@ namespace Launching_Interface
 
          if (GererDonnees.KeyboardMode == 1)
          {
-            ButCont.Content = ListeLangueOficielle[22];
-            ButCont.IsChecked = true;
+            ButCont.Content = ListeLangueOficielle[23];
+            ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/keyboard.png", UriKind.Relative));
+            ButCont.IsChecked = false;
          }
          else if (GererDonnees.KeyboardMode == 0)
          {
-            ButCont.Content = ListeLangueOficielle[23];
-            ButCont.IsChecked = false;
+            ButCont.Content = ListeLangueOficielle[22];
+            ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/Controller2Sides.png", UriKind.Relative));
+            ButCont.IsChecked = true;
          }
-
-
-
       }
 
       void GérerLangues()
@@ -499,7 +513,39 @@ namespace Launching_Interface
 
       private void MenuButton_Click(object sender, RoutedEventArgs e)
       {
+         StreamWriter writer = new StreamWriter("../../Saves/save.txt");
+         writer.WriteLine();
+         writer.WriteLine("false");
          this.NavigationService.Navigate(new MainPage());
+      }
+
+      void BonScreenshot()
+      {
+         string nomImage = "";
+
+         StreamReader lecteurDonnées = new StreamReader("../../Saves/save.txt");
+         while (!lecteurDonnées.EndOfStream)
+         {
+            switch (lecteurDonnées.ReadLine())
+            {
+               case "0":
+                  nomImage = "screenshot0.png";
+                  break;
+               case "1":
+                  nomImage = "screenshot1.png";
+                  break;
+               case "2":
+                  nomImage = "screenshot2.png";
+                  break;
+            }
+         }
+         lecteurDonnées.Close();
+         ImageFond.Source = new BitmapImage(new Uri(@"/Pictures/Saves/" + nomImage, UriKind.Relative));
+      }
+
+      private void saveButton_Click(object sender, RoutedEventArgs e)
+      {
+
       }
    }
 }
