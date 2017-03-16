@@ -32,6 +32,7 @@ namespace Launching_Interface
       public static int KeyboardMode { get; set; }   // 0 = false || 1 = true
       public static int NbNiveauxComplétés { get; set; } // 1,2,3
       public static bool PremierFichier { get; set; }
+      
       public static TimeSpan Temps { get; set; }
 
       public static List<string> ListeFrancais { get; private set; }
@@ -42,8 +43,6 @@ namespace Launching_Interface
 
       static GererDonnees()
       {
-         
-
          ListeFrancais = new List<string>();
          ListeAnglais  = new List<string>();
          ListeEspagnol = new List<string>();

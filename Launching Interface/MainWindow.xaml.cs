@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Launching_Interface
 {
@@ -20,10 +21,29 @@ namespace Launching_Interface
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
+      public MainWindow()
+      {
+         
+         InitializeComponent();
+         List<string> ListeReçu = new List<string>();
+
+         StreamReader lecteurDonnées = new StreamReader("../../Saves/save.txt");
+         while (!lecteurDonnées.EndOfStream)
+         {
+            ListeReçu.Add( lecteurDonnées.ReadLine());           
+         }
+         lecteurDonnées.Close();
+
+         if (ListeReçu[1] == "true")
+         {
+            MainFrame.Navigate(new MenuDansJeu());
+         }
+         else
+         {
             MainFrame.Navigate(new MainPage());
+         }
+          
+         
       }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
