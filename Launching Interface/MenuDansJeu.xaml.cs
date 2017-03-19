@@ -28,13 +28,11 @@ namespace Launching_Interface
       bool EstPremiereFois { get; set; }
       List<string> ListeLangueOficielle { get; set; }
       List<int> ListeInfosÀEnvoyer { get; set; }
-      
-      
 
       int LangueOficielle { get; set; }
       public MenuDansJeu()
       {
-
+            RefreshData();
 
          EstPremiereFois = true;
          ListeLangueOficielle = new List<string>();
@@ -55,6 +53,33 @@ namespace Launching_Interface
          ChangerRéglages();
 
       }
+
+        private void RefreshData()
+        {
+            StreamReader reader = new StreamReader("F:/programmation clg/quatrième session/WPFINTERFACE/Launching Interface/Saves/Settings.txt");
+            string line = reader.ReadLine();
+            string[] parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.VolMusique = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.VolEffets = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.Langue = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.RenderDistance = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.Fps = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.FullscreenMode = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.KeyboardMode = int.Parse(parts[1]);
+            reader.Close();
+        }
 
       void AssocierListeEnvoyer()
       {
@@ -84,6 +109,7 @@ namespace Launching_Interface
 
       private void BackButton_Click(object sender, RoutedEventArgs e)
       {
+            SaveSettings();
          // this.NavigationService.Navigate(new MainPage());
 
          ListeInfosÀEnvoyer[0] = GererDonnees.Langue;
@@ -99,6 +125,20 @@ namespace Launching_Interface
             PlaceMouseInTheCenter();
          Application.Current.Shutdown();
       }
+
+        private void SaveSettings()
+        {
+            StreamWriter w = new StreamWriter("../../Saves/Settings.txt");
+
+            w.WriteLine("Music: " + GererDonnees.VolMusique.ToString());
+            w.WriteLine("Sound: " + GererDonnees.VolEffets.ToString());
+            w.WriteLine("Language: " + GererDonnees.Langue.ToString());
+            w.WriteLine("Render Distance: " + GererDonnees.RenderDistance.ToString());
+            w.WriteLine("Frame Rate: " + GererDonnees.Fps.ToString());
+            w.WriteLine("Fullscreen: " + GererDonnees.FullscreenMode.ToString());
+            w.WriteLine("Input: " + GererDonnees.KeyboardMode.ToString());
+            w.Close();
+        }
 
         [DllImport("User32.dll")]
         private static extern bool SetCursorPos(int X, int Y);
@@ -530,6 +570,7 @@ namespace Launching_Interface
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
       {
+            SaveSettings();
          StreamWriter writer = new StreamWriter("../../Saves/save.txt");
          writer.WriteLine("0");
          writer.WriteLine("false");
@@ -570,29 +611,13 @@ namespace Launching_Interface
 
         void BonScreenshot()
       {
-         string nomImage = "";
-
-         StreamReader lecteurDonnées = new StreamReader("../../Saves/save.txt");
-         switch (lecteurDonnées.ReadLine())
-         {
-               case "0":
-                  nomImage = "screenshot0.png";
-                  break;
-               case "1":
-                  nomImage = "screenshot1.png";
-                  break;
-               case "2":
-                  nomImage = "screenshot2.png";
-                  break;
-         }
-         lecteurDonnées.Close();
             //ImageFond.Source = new BitmapImage(new Uri(@"Pictures/SavesScreenshots/save0.bmp", UriKind.Relative));
             //ImageFond.Source = new BitmapImage(new Uri(@"../../Saves/" + nomImage, UriKind.Relative));
 
             //ImageFond = new Image();
             BitmapImage src = new BitmapImage();
             src.BeginInit();
-            src.UriSource = new Uri(@"../../Saves/" + nomImage, UriKind.Relative);
+            src.UriSource = new Uri(@"../../Saves/pendingscreenshot.png", UriKind.Relative);
             src.CacheOption = BitmapCacheOption.OnLoad;
             src.EndInit();
             ImageFond.Source = src;
@@ -604,7 +629,11 @@ namespace Launching_Interface
 
       private void saveButton_Click(object sender, RoutedEventArgs e)
       {
-
-      }
+            StreamReader r = new StreamReader("../../Saves/save.txt");
+            int n = int.Parse(r.ReadLine());
+            r.Close();
+            File.Copy("../../Saves/pendingsave.txt", "../../Saves/save" + n + ".txt", true);
+            File.Copy("../../Saves/pendingscreenshot.png", "../../Saves/screenshot" + n + ".png", true);
+        }
    }
 }
