@@ -224,7 +224,6 @@
     <Resource Include="Pictures\CreateJA.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pictures\Instructions\TouchesManette\" />
     <Folder Include="Saves\" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +249,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\Instructions\TouchesClavier\SpaceBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesManette\A_Xbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesManette\Start_Xbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesManette\X_Xbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesManette\LT_Xbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Instructions\TouchesManette\Stick_Xbox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
