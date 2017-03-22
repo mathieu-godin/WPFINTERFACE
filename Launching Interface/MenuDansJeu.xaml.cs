@@ -38,7 +38,7 @@ namespace Launching_Interface
          ListeLangueOficielle = new List<string>();
          ListeInfosÀEnvoyer = new List<int>();
 
-         AssocierListeEnvoyer();
+            AjouterListeEnvoyer();//AssocierListeEnvoyer();
 
          InitializeComponent();
 
@@ -82,7 +82,7 @@ namespace Launching_Interface
             reader.Close();
         }
 
-      void AssocierListeEnvoyer()
+      void AjouterListeEnvoyer()//AssocierListeEnvoyer()
       {
 
          if (GererDonnees.PremierFichier == true)
@@ -98,34 +98,34 @@ namespace Launching_Interface
          else
          {
             ListeInfosÀEnvoyer = GererDonnees.ListeInfosRecus;
-            ListeInfosÀEnvoyer[0] = GererDonnees.Langue;
-            ListeInfosÀEnvoyer[1] = GererDonnees.Fps;
-            ListeInfosÀEnvoyer[2] = GererDonnees.RenderDistance;
-            ListeInfosÀEnvoyer[3] = GererDonnees.VolMusique;
-            ListeInfosÀEnvoyer[4] = GererDonnees.VolEffets;
-            ListeInfosÀEnvoyer[5] = GererDonnees.FullscreenMode;
-            ListeInfosÀEnvoyer[6] = GererDonnees.KeyboardMode;
-         }
+                AssocierListeEnvoyer();
+            }
       }
 
       private void BackButton_Click(object sender, RoutedEventArgs e)
       {
             SaveSettings();
-         // this.NavigationService.Navigate(new MainPage());
+            // this.NavigationService.Navigate(new MainPage());
 
-         ListeInfosÀEnvoyer[0] = GererDonnees.Langue;
-         ListeInfosÀEnvoyer[1] = GererDonnees.Fps;
-         ListeInfosÀEnvoyer[2] = GererDonnees.RenderDistance;
-         ListeInfosÀEnvoyer[3] = GererDonnees.VolMusique;
-         ListeInfosÀEnvoyer[4] = GererDonnees.VolEffets;
-         ListeInfosÀEnvoyer[5] = GererDonnees.FullscreenMode;
-         ListeInfosÀEnvoyer[6] = GererDonnees.KeyboardMode;
+            AssocierListeEnvoyer();
 
-         GererDonnees.ÉcrireFichier(ListeInfosÀEnvoyer);
+            GererDonnees.ÉcrireFichier(ListeInfosÀEnvoyer);
 
             PlaceMouseInTheCenter();
          Application.Current.Shutdown();
       }
+
+        void AssocierListeEnvoyer()
+        {
+            int cpt = 0;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.Langue; ++cpt;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.Fps; ++cpt;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.RenderDistance; ++cpt;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.VolMusique; ++cpt;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.VolEffets; ++cpt;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.FullscreenMode; ++cpt;
+            ListeInfosÀEnvoyer[cpt] = GererDonnees.KeyboardMode;
+        }
 
         private void SaveSettings()
         {
@@ -339,15 +339,17 @@ namespace Launching_Interface
       private void ButCont_Unchecked(object sender, RoutedEventArgs e)
       {
          GererDonnees.KeyboardMode = 1;
-         
-         ChangerRéglages();
-      }
+
+            //ChangerRéglages();
+            Instructions();
+        }
       private void ButCont_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.KeyboardMode = 0;
          GererDonnees.PremierFichier = false;
-         ChangerRéglages();
-      }
+            //ChangerRéglages();
+            Instructions();
+        }
 
       // Langues
       #region 
@@ -419,57 +421,94 @@ namespace Launching_Interface
             ButFull.IsChecked = false;
          }
 
-         if (GererDonnees.KeyboardMode == 1)
-         {
-            ButCont.Content = ListeLangueOficielle[23];
-            ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/keyboard.png", UriKind.Relative));
-            ButCont.IsChecked = false;
-         }
-         else if (GererDonnees.KeyboardMode == 0)
-         {
-            ButCont.Content = ListeLangueOficielle[22];
-            ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/Controller2Sides.png", UriKind.Relative));
-            ButCont.IsChecked = true;
-         }
-      }
+            //if (GererDonnees.KeyboardMode == 1)
+            //{
+            //   ButCont.Content = ListeLangueOficielle[23];
+            //   ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/keyboard.png", UriKind.Relative));
+            //   ButCont.IsChecked = false;
+            //}
+            //else if (GererDonnees.KeyboardMode == 0)
+            //{
+            //   ButCont.Content = ListeLangueOficielle[22];
+            //   ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/Controller2Sides.png", UriKind.Relative));
+            //   ButCont.IsChecked = true;
+            //}
+            textFleches.Text = ListeLangueOficielle[41];
+            textWASD.Text = ListeLangueOficielle[40];
+            textShift.Text = ListeLangueOficielle[38];
+            textE.Text = ListeLangueOficielle[42];
+            textP.Text = ListeLangueOficielle[35];
+            textSpace.Text = ListeLangueOficielle[39];
+
+            Instructions();
+        }
 
       void GérerLangues()
       {
-         if (GererDonnees.Langue == 0)
-         {
-            ListeLangueOficielle = GererDonnees.ListeFrancais;
-            RBfr.IsChecked = true;
-            RBan.IsChecked = false;
-            RBes.IsChecked = false;
-            RBjp.IsChecked = false;
-         }
-         if (GererDonnees.Langue == 1)
-         {
-            ListeLangueOficielle = GererDonnees.ListeAnglais;
-            RBfr.IsChecked = false;
-            RBan.IsChecked = true;
-            RBes.IsChecked = false;
-            RBjp.IsChecked = false;
-         }
-         if (GererDonnees.Langue == 2)
-         {
-            ListeLangueOficielle = GererDonnees.ListeEspagnol;
-            RBfr.IsChecked = false;
-            RBan.IsChecked = false;
-            RBes.IsChecked = true;
-            RBjp.IsChecked = false;
-         }
-         if (GererDonnees.Langue == 3)
-         {
-            ListeLangueOficielle = GererDonnees.ListeJaponais;
-            RBfr.IsChecked = false;
-            RBan.IsChecked = false;
-            RBes.IsChecked = false;
-            RBjp.IsChecked = true;
-         }
-      }
-      //on s'en fou de ces trois la
-      private void musicvalue_TextChanged(object sender, TextChangedEventArgs e)
+            //if (GererDonnees.Langue == 0)
+            //{
+            //   ListeLangueOficielle = GererDonnees.ListeFrancais;
+            //   RBfr.IsChecked = true;
+            //   RBan.IsChecked = false;
+            //   RBes.IsChecked = false;
+            //   RBjp.IsChecked = false;
+            //}
+            //if (GererDonnees.Langue == 1)
+            //{
+            //   ListeLangueOficielle = GererDonnees.ListeAnglais;
+            //   RBfr.IsChecked = false;
+            //   RBan.IsChecked = true;
+            //   RBes.IsChecked = false;
+            //   RBjp.IsChecked = false;
+            //}
+            //if (GererDonnees.Langue == 2)
+            //{
+            //   ListeLangueOficielle = GererDonnees.ListeEspagnol;
+            //   RBfr.IsChecked = false;
+            //   RBan.IsChecked = false;
+            //   RBes.IsChecked = true;
+            //   RBjp.IsChecked = false;
+            //}
+            //if (GererDonnees.Langue == 3)
+            //{
+            //   ListeLangueOficielle = GererDonnees.ListeJaponais;
+            //   RBfr.IsChecked = false;
+            //   RBan.IsChecked = false;
+            //   RBes.IsChecked = false;
+            //   RBjp.IsChecked = true;
+            //}
+            if (GererDonnees.Langue == 0)
+            {
+                ListeLangueOficielle = GererDonnees.ListeFrancais;
+                CocherLangues(true, false, false, false);
+            }
+            if (GererDonnees.Langue == 1)
+            {
+                ListeLangueOficielle = GererDonnees.ListeAnglais;
+                CocherLangues(false, true, false, false);
+            }
+            if (GererDonnees.Langue == 2)
+            {
+                ListeLangueOficielle = GererDonnees.ListeEspagnol;
+                CocherLangues(false, false, true, false);
+            }
+            if (GererDonnees.Langue == 3)
+            {
+                ListeLangueOficielle = GererDonnees.ListeJaponais;
+                CocherLangues(false, false, false, true);
+            }
+        }
+
+        void CocherLangues(bool fr, bool an, bool es, bool jp)
+        {
+            RBfr.IsChecked = fr;
+            RBan.IsChecked = an;
+            RBes.IsChecked = es;
+            RBjp.IsChecked = jp;
+        }
+
+        //on s'en fou de ces trois la
+        private void musicvalue_TextChanged(object sender, TextChangedEventArgs e)
       {
 
       }
@@ -629,7 +668,86 @@ namespace Launching_Interface
             //ImageFond.Source = src;
         }
 
-      private void saveButton_Click(object sender, RoutedEventArgs e)
+        void Instructions()
+        {
+            if (GererDonnees.KeyboardMode == 1)
+            {
+                ButCont.Content = ListeLangueOficielle[23];
+                ButCont.IsChecked = false;
+                ChangerImagesClavier();
+                ChangerMargesClavier();
+
+                textL.Text = " ";
+                textR.Text = " ";
+            }
+            else
+            {
+                ButCont.Content = ListeLangueOficielle[22];
+                ButCont.IsChecked = true;
+                ChangerImagesManette();
+                ChangerMargesManette();
+
+                textL.Text = ListeLangueOficielle[43];
+                textR.Text = ListeLangueOficielle[44];
+            }
+
+
+        }
+
+        void ChangerImagesClavier()
+        {
+            ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/keyboard.png", UriKind.Relative));
+            wasd.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesClavier/WASD.png", UriKind.Relative));
+            e.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesClavier/E.png", UriKind.Relative));
+            SpaceBar.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesClavier/SpaceBar.png", UriKind.Relative));
+            Shift.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesClavier/Shift.png", UriKind.Relative));
+            p.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesClavier/P.png", UriKind.Relative));
+            FlèchesClavier.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesClavier/FlèchesClavier.png", UriKind.Relative));
+        }
+        void ChangerMargesClavier()
+        {
+            textWASD.Margin = new Thickness(0);
+            textSpace.Margin = new Thickness(0);
+            textFleches.Margin = new Thickness(0);
+
+            wasd.Margin = new Thickness(50, -100, 500, -375);
+            e.Margin = new Thickness(206, -280, 250, -212);
+            p.Margin = new Thickness(165, -200, 275, -230);
+            SpaceBar.Margin = new Thickness(-40, -210, 300, -184);
+            Shift.Margin = new Thickness(166, -235, 213, -260);
+            FlèchesClavier.Margin = new Thickness(10, -28, 400, -278);
+
+        }
+        void ChangerImagesManette()
+        {
+            ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/Controller2Sides.png", UriKind.Relative));
+            wasd.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesManette/Stick_Xbox.png", UriKind.Relative));
+            e.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesManette/X_Xbox.png", UriKind.Relative));
+            p.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesManette/Start_Xbox.png", UriKind.Relative));
+            SpaceBar.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesManette/A_Xbox.png", UriKind.Relative));
+            Shift.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesManette/LT_Xbox.png", UriKind.Relative));
+            FlèchesClavier.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/TouchesManette/Stick_Xbox.png", UriKind.Relative));
+        }
+        void ChangerMargesManette()
+        {
+            textWASD.Margin = new Thickness(-10, 0, 0, 0);
+            textSpace.Margin = new Thickness(-22.5, 0, 20, 0);
+
+            textFleches.Margin = new Thickness(-17, 0, 15, 0);
+
+            wasd.Margin = new Thickness(4200, 950, 8600, -1000);
+            e.Margin = new Thickness(5800, 180, 9900, 700);
+            p.Margin = new Thickness(170, -47, 770, -100);
+            SpaceBar.Margin = new Thickness(2260, 740, 3820, -20);
+            Shift.Margin = new Thickness(175, 20, 370, -9);
+            FlèchesClavier.Margin = new Thickness(4550, 950, 8170, -1000);
+
+            if (GererDonnees.Langue == 3) { textFleches.Margin = new Thickness(-10, 0, 5, 0); }
+            if (GererDonnees.Langue == 2) { textFleches.Margin = new Thickness(-20, 0, 5, 0); }
+
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
       {
             StreamReader r = new StreamReader("../../Saves/save.txt");
             int n = int.Parse(r.ReadLine());
