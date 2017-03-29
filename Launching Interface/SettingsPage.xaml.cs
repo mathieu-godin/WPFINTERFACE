@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Launching_Interface
 {
-   /// <summary>
-   /// Interaction logic for SettingsPage.xaml
-   /// </summary>
+    //enum Language
+    //{
+    //    French, English, Spanish, Japanese
+    //}
 
-   public partial class SettingsPage : Page
+    //enum Input
+    //{
+    //    Controller, Keyboard
+    //}
+
+    /// <summary>
+    /// Interaction logic for SettingsPage.xaml
+    /// </summary>
+    public partial class SettingsPage : Page
    {
       List<string> ListeLangueOficielle { get; set; }
       List<int> ListeInfosÀEnvoyer { get; set; }
@@ -45,7 +56,7 @@ namespace Launching_Interface
          ChangerRéglages();
       }
 
-      void AssocierListeEnvoyer()
+        void AssocierListeEnvoyer()
       {
 
          if (GererDonnees.PremierFichier == true)
@@ -71,8 +82,9 @@ namespace Launching_Interface
          }
       }
 
-      private void BackButton_Click(object sender, RoutedEventArgs e)
+      public void BackButton_Click(object sender, RoutedEventArgs e)
       {
+            SaveSettings();
          this.NavigationService.Navigate(new MainPage());
 
          ListeInfosÀEnvoyer[0] = GererDonnees.Langue;
@@ -85,6 +97,20 @@ namespace Launching_Interface
 
          GererDonnees.ÉcrireFichier(ListeInfosÀEnvoyer);
       }
+
+        private void SaveSettings()
+        {
+            StreamWriter w = new StreamWriter("../../Saves/Settings.txt");
+
+            w.WriteLine("Music: " + GererDonnees.VolMusique.ToString());
+            w.WriteLine("Sound: " + GererDonnees.VolEffets.ToString());
+            w.WriteLine("Language: " + GererDonnees.Langue.ToString());
+            w.WriteLine("Render Distance: " + GererDonnees.RenderDistance.ToString());
+            w.WriteLine("Frame Rate: " + GererDonnees.Fps.ToString());
+            w.WriteLine("Fullscreen: " + GererDonnees.FullscreenMode.ToString());
+            w.WriteLine("Input: " + GererDonnees.KeyboardMode.ToString());
+            w.Close();
+        }
 
       private void MusicVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
       {
@@ -465,6 +491,7 @@ namespace Launching_Interface
          double value = slider.Value;
          GererDonnees.VolEffets = (int)Math.Round(value, 0);
          soundvalue.Text = GererDonnees.VolEffets.ToString();
+         
       }
 
       private void ResetButton_Click(object sender, RoutedEventArgs e)
