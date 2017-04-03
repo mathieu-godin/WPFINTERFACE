@@ -191,7 +191,8 @@ namespace Launching_Interface
         {
             ManagePause(saveNumber);
             //string path = "F:/programmation clg/quatrième session/HyperV/HyperV/HyperV/bin/x86/Debug/HyperV.exe";
-            string path = "C:/Users/Mathieu/Source/Repos/HyperV/HyperV/HyperV/bin/x86/Debug/HyperV.exe";
+            //string path = "C:/Users/Mathieu/Source/Repos/HyperV/HyperV/HyperV/bin/x86/Debug/HyperV.exe";
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"../../../../bin/x86/Debug/HyperV.exe");
             ProcessStartInfo p = new ProcessStartInfo();
             p.FileName = path;
             p.WorkingDirectory = System.IO.Path.GetDirectoryName(path);
