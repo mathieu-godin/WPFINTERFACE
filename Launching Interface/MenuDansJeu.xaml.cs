@@ -577,7 +577,7 @@ namespace Launching_Interface
 
       private void ResetButton_Click(object sender, RoutedEventArgs e)
       {
-         GererDonnees.PremierFichier = true;
+         GererDonnees.PremierFichier = true; //nothing for commit
          GererDonnees.AAAA = true;
          GererDonnees.RéglagesBase();
          ChangerRéglages();
