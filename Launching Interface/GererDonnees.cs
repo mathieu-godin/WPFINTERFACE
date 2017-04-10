@@ -13,7 +13,7 @@ namespace Launching_Interface
       const string CHEMIN_ÉCRITURE = "../../FichiersModifies/";
       const string NOM_FICHIER_ENVOI = "versXna.txt";
 
-      public static bool AAAA = true;
+      public static bool AAAA = true; // nothing
 
       const int LANGUE_BASE = 0; 
       const int FPS_BASE = 60;     
