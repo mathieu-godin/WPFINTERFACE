@@ -34,10 +34,7 @@ namespace Launching_Interface
    {
       List<string> ListeLangueOficielle { get; set; }
       List<int> ListeInfosÀEnvoyer { get; set; }
-
-      int LangueOficielle { get; set; }
-
-      
+      int LangueOficielle { get; set; }   
 
       public SettingsPage()
       {
@@ -48,12 +45,12 @@ namespace Launching_Interface
          InitializeComponent();
 
          GérerFPS();
-         GererDonnees.AAAA = true;
+         GererDonnees.ChoisirRenderDistance = true;
          GérerLangues();
          GérerRenderDistance();
          GérerSon();          
 
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
 
         void AssocierListeEnvoyer()
@@ -130,9 +127,9 @@ namespace Launching_Interface
       private void RDistanceSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) // Render Distance
       {
          double value = 0;
-         if(GererDonnees.AAAA == true)
+         if(GererDonnees.ChoisirRenderDistance == true)
          {
-            GererDonnees.AAAA = false;
+            GererDonnees.ChoisirRenderDistance = false;
             switch(GererDonnees.RenderDistance)
             {
                case 10 :
@@ -281,12 +278,6 @@ namespace Launching_Interface
          {
             ButFull.Content = ListeLangueOficielle[29];
          }
-
-
-         //Application.Current.MainWindow.WindowState = WindowState.Maximized;
-         //Application.Current.MainWindow.WindowStyle = WindowStyle.None;
-         //Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
-
          Application.Current.MainWindow.WindowStyle = WindowStyle.None;
          Application.Current.MainWindow.ResizeMode = ResizeMode.NoResize;
          Application.Current.MainWindow.Left = 0;
@@ -294,21 +285,17 @@ namespace Launching_Interface
          Application.Current.MainWindow.Width = SystemParameters.VirtualScreenWidth;
          Application.Current.MainWindow.Height = SystemParameters.VirtualScreenHeight;
          Application.Current.MainWindow.Topmost = true;
-
-
-
-
       }
       private void ButCont_Unchecked(object sender, RoutedEventArgs e)
       {    
          GererDonnees.KeyboardMode = 0;
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
       private void ButCont_Checked(object sender, RoutedEventArgs e)
       {        
          GererDonnees.KeyboardMode = 1;
          GererDonnees.PremierFichier = false;
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
 
       // Langues
@@ -319,32 +306,31 @@ namespace Launching_Interface
          GererDonnees.Langue = 2;
          ListeLangueOficielle = GererDonnees.ListeEspagnol;
          GererDonnees.PremierFichier = false;
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
       private void RBjp_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.Langue = 3;
          ListeLangueOficielle = GererDonnees.ListeJaponais;
          GererDonnees.PremierFichier = false;
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
       private void RBfr_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.Langue = 0;
          ListeLangueOficielle = GererDonnees.ListeFrancais;
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
       private void RBan_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.Langue = 1;
          ListeLangueOficielle = GererDonnees.ListeAnglais;
          GererDonnees.PremierFichier = false;
-         ChangerRéglages();
+         ChangerLangueRéglages();
       }
 
-      void ChangerRéglages()
+      void ChangerLangueRéglages()
       {
-
          Lang.Text = ListeLangueOficielle[31];
 
          RBan.Content = ListeLangueOficielle[15];
@@ -497,9 +483,9 @@ namespace Launching_Interface
       private void ResetButton_Click(object sender, RoutedEventArgs e)
       {
          GererDonnees.PremierFichier = true;
-         GererDonnees.AAAA = true;
+         GererDonnees.ChoisirRenderDistance = true;
          GererDonnees.RéglagesBase();
-         ChangerRéglages();
+         ChangerLangueRéglages();
          GérerFPS();
          GérerRenderDistance();
          GérerLangues();
