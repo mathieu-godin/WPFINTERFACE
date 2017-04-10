@@ -26,7 +26,7 @@ namespace Launching_Interface
          
          InitializeComponent();
          List<string> ListeReçu = new List<string>();
-         
+
          StreamReader lecteurDonnées = new StreamReader("../../Saves/save.txt");
          while (!lecteurDonnées.EndOfStream)
          {
@@ -34,15 +34,48 @@ namespace Launching_Interface
          }
          lecteurDonnées.Close();
 
-         //if (ListeReçu[1] == "true")
-         //{
+            RefreshData();
+
+         if (ListeReçu[1] == "true")
+         {
             MainFrame.Navigate(new MenuDansJeu());
-         //}
-         //else
-         //{
-         //   MainFrame.Navigate(new MainPage());
-         //}         
+         }
+         else
+         {
+            MainFrame.Navigate(new MainPage());
+         }
+          
+         
       }
+
+        private void RefreshData()
+        {
+            //StreamReader reader = new StreamReader("F:/programmation clg/quatrième session/WPFINTERFACE/Launching Interface/Saves/Settings.txt");
+            //StreamReader reader = new StreamReader("C:/Users/Mathieu/Source/Repos/WPFINTERFACE/Launching Interface/Saves/Settings.txt");
+            StreamReader reader = new StreamReader("../../Saves/Settings.txt");
+            string line = reader.ReadLine();
+            string[] parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.VolMusique = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.VolEffets = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.Langue = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.RenderDistance = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.Fps = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.FullscreenMode = int.Parse(parts[1]);
+            line = reader.ReadLine();
+            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+            GererDonnees.KeyboardMode = int.Parse(parts[1]);
+            reader.Close();
+        }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
