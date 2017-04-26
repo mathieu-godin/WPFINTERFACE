@@ -50,37 +50,13 @@ namespace Launching_Interface
 
         private void RefreshData()
         {
-            //StreamReader reader = new StreamReader("F:/programmation clg/quatrième session/WPFINTERFACE/Launching Interface/Saves/Settings.txt");
-            //StreamReader reader = new StreamReader("C:/Users/Mathieu/Source/Repos/WPFINTERFACE/Launching Interface/Saves/Settings.txt");
             StreamReader reader = new StreamReader("../../Saves/Settings.txt");
-            string line = reader.ReadLine();
-            string[] parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.VolMusique = int.Parse(parts[1]);
-            line = reader.ReadLine();
-            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.VolEffets = int.Parse(parts[1]);
-            line = reader.ReadLine();
-            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.Langue = int.Parse(parts[1]);
-            line = reader.ReadLine();
-            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.RenderDistance = int.Parse(parts[1]);
-            line = reader.ReadLine();
-            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.Fps = int.Parse(parts[1]);
-            line = reader.ReadLine();
-            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.FullscreenMode = int.Parse(parts[1]);
-            line = reader.ReadLine();
-            parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
-            GererDonnees.KeyboardMode = int.Parse(parts[1]);
-            reader.Close();
-        }
+            GererDonnees.InitGererDonnees(reader);
+      }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
             MainFrame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
-
         }
     }
 }
