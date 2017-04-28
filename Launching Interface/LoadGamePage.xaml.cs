@@ -114,24 +114,45 @@ namespace Launching_Interface
             case 0:
                image0.Source = src;
                image0.Margin = new Thickness(30);
-               slotA.Text = ÉlémentFichiersLangues(7) + " A";
+               slotA.Text = ÉlémentFichiersLangues(2);
                Level0.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
                Time0.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
             case 1:
                image1.Source = src;
                image1.Margin = new Thickness(30);
-               slotB.Text = ÉlémentFichiersLangues(7) + " B";
+               slotB.Text = ÉlémentFichiersLangues(5);
                Level1.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
                Time1.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
             case 2:
                image2.Source = src;
                image2.Margin = new Thickness(30);
-               slotC.Text = ÉlémentFichiersLangues(7) + " C";
+               slotC.Text = ÉlémentFichiersLangues(8);
                Level2.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
                Time2.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
+               //case 0:
+               //   image0.Source = src;
+               //   image0.Margin = new Thickness(30);
+               //   slotA.Text = ÉlémentFichiersLangues(7) + " A";
+               //   Level0.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               //   Time0.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
+               //   break;
+               //case 1:
+               //   image1.Source = src;
+               //   image1.Margin = new Thickness(30);
+               //   slotB.Text = ÉlémentFichiersLangues(7) + " B";
+               //   Level1.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               //   Time1.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
+               //   break;
+               //case 2:
+               //   image2.Source = src;
+               //   image2.Margin = new Thickness(30);
+               //   slotC.Text = ÉlémentFichiersLangues(7) + " C";
+               //   Level2.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               //   Time2.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
+               //   break;
          }
          ListeÉlémentsAAfficher.Clear();
 
@@ -192,34 +213,18 @@ namespace Launching_Interface
 
       void LireInformationsNouvellePartie(int i)
       {
-         StreamReader lecteurDonnées = new StreamReader("../../Saves/save" + i + ".txt");
-         while (!lecteurDonnées.EndOfStream)
+         switch (i)
          {
-            string Lignelue = lecteurDonnées.ReadLine();
-            string[] séparateur = Lignelue.Split(new string[] { "l: " }, StringSplitOptions.None);
-            ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-            Lignelue = lecteurDonnées.ReadLine();
-            séparateur = Lignelue.Split(new string[] { "n: " }, StringSplitOptions.None);
-            ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-            Lignelue = lecteurDonnées.ReadLine();
-            séparateur = Lignelue.Split(new string[] { "n: " }, StringSplitOptions.None);
-            ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-            Lignelue = lecteurDonnées.ReadLine();
-            séparateur = Lignelue.Split(new string[] { "d: " }, StringSplitOptions.None);
-            ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-            Lignelue = lecteurDonnées.ReadLine();
-            séparateur = Lignelue.Split(new string[] { "e: " }, StringSplitOptions.None);
-            ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-            Lignelue = lecteurDonnées.ReadLine();
-            séparateur = Lignelue.Split(new string[] { "k: " }, StringSplitOptions.None);
-            ListeÉlémentsAAfficher.Add(séparateur[1]);
+            case 0:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher0;
+               break;
+            case 1:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher1;
+               break;
+            case 2:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher2;
+               break;
          }
-         lecteurDonnées.Close();
       }
 
       private void PlaceCreateImage(int i)

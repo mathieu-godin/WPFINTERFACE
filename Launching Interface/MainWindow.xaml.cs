@@ -44,14 +44,34 @@ namespace Launching_Interface
             {
                 MainFrame.Navigate(new MainPage());
             }
-
-
         }
 
         private void RefreshData()
         {
-            StreamReader reader = new StreamReader("../../Saves/Settings.txt");
-            GererDonnees.InitGererDonnees(reader);
+         StreamReader reader = new StreamReader("../../Saves/Settings.txt");
+         //GererDonnees.InitGererDonnees(reader);
+         string line = reader.ReadLine();
+         string[] parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.VolMusique = int.Parse(parts[1]);
+         line = reader.ReadLine();
+         parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.VolEffets = int.Parse(parts[1]);
+         line = reader.ReadLine();
+         parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.Langue = int.Parse(parts[1]);
+         line = reader.ReadLine();
+         parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.RenderDistance = int.Parse(parts[1]);
+         line = reader.ReadLine();
+         parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.Fps = int.Parse(parts[1]);
+         line = reader.ReadLine();
+         parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.FullscreenMode = int.Parse(parts[1]);
+         line = reader.ReadLine();
+         parts = line.Split(new string[] { ": " }, StringSplitOptions.None);
+         GererDonnees.KeyboardMode = int.Parse(parts[1]);
+         reader.Close();
       }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)

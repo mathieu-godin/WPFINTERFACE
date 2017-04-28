@@ -60,7 +60,7 @@ namespace Launching_Interface
          }
          tbtitre.Text = LangueOficielleNewPage[1];
          BackButton.Text = LangueOficielleNewPage[0];
-         CheckForExistingGames();
+      //   CheckForExistingGames();
          PlaceContent();
       }
 
@@ -135,7 +135,6 @@ namespace Launching_Interface
                Time2.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
          }
-         ListeÉlémentsAAfficher.Clear();
 
          OrganiserMargesDesCaractéristiques();
          RendreBoutonsBleus(i);
@@ -176,15 +175,12 @@ namespace Launching_Interface
          switch (i)
          {
             case 0:
-              // slotA.Foreground = Brushes.Blue;   
                Save0Button.BorderBrush = Brushes.DarkBlue;
                break;
-            case 1:
-               //slotB.Foreground = Brushes.Blue;        
+            case 1:    
                Save1Button.BorderBrush = Brushes.DarkBlue;
                break;
             case 2:
-               //slotC.Foreground = Brushes.Blue;
                Save2Button.BorderBrush = Brushes.DarkBlue;
                break;
          }
@@ -194,31 +190,20 @@ namespace Launching_Interface
 
       void LireInformationsNouvellePartie(int i)
       {
-         StreamReader lecteurDonnées = new StreamReader("../../Saves/save" + i + ".txt");
-         string Lignelue = lecteurDonnées.ReadLine();
-         string[] séparateur = Lignelue.Split(new string[] { "l: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
+         switch (i)
+         {
+            case 0:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher0;
+               break;
+            case 1:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher1;
+               break;
+            case 2:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher2;
+               break;
+          }
+          
 
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "n: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "n: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "d: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "e: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "k: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-         lecteurDonnées.Close();
       }
 
       private void PlaceCreateImage(int i)
@@ -260,18 +245,18 @@ namespace Launching_Interface
          l.Children.Add(e);
       }
 
-      void CheckForExistingGames()
-      {
-         StreamReader r;
+      //void CheckForExistingGames()
+      //{
+      //   StreamReader r;
 
-         GererDonnees.GameExists = new bool[3];
-         for (int i = 0; i < 3; ++i)
-         {
-            r = new StreamReader("../../Saves/save" + i + ".txt");
-           GererDonnees. GameExists[i] = r.ReadLine() != "";
-            r.Close();
-         }
-      }
+      //   GererDonnees.GameExists = new bool[3];
+      //   for (int i = 0; i < 3; ++i)
+      //   {
+      //      r = new StreamReader("../../Saves/save" + i + ".txt");
+      //     GererDonnees. GameExists[i] = r.ReadLine() != "";
+      //      r.Close();
+      //   }
+      //}
 
       void BackButton_Click(object sender, RoutedEventArgs e)
       {
