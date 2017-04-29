@@ -19,53 +19,45 @@ namespace Launching_Interface
 
       public LoadGamePage()
         {
-         LangueOficielleLoadPage = new List<string>();
-         ListeÉlémentsAAfficher = new List<string>();
-
-         InitializeComponent();
-         switch (GererDonnees.Langue)
-         {
-            case 0:
-               LangueOficielleLoadPage = GererDonnees.ListeFrancais;
-               tbtitre.Margin = new Thickness(-40, 13, 42, 5);
-               BackButton.Margin = new Thickness(28, 17, 113, 52);
-               break;
-            case 1:
-               LangueOficielleLoadPage = GererDonnees.ListeAnglais;
-               tbtitre.Margin = new Thickness(-30, 13, 49, 5);
-               BackButton.Margin = new Thickness(28, 17, 113, 52);
-               break;
-            case 2:
-               LangueOficielleLoadPage = GererDonnees.ListeEspagnol;
-               tbtitre.Margin = new Thickness(-40, 13, 42, 5);
-               BackButton.Margin = new Thickness(24, 17, 118, 52);
-               break;
-            case 3:
-               LangueOficielleLoadPage = GererDonnees.ListeJaponais;
-               tbtitre.Margin = new Thickness(-30, 13, 49, 5);
-               BackButton.Margin = new Thickness(28, 17, 113, 52);
-               break;
-
-         }
-         tbtitre.Text = LangueOficielleLoadPage[32];
-         BackButton.Text = LangueOficielleLoadPage[0];
-
-         CheckForExistingGames();
-         PlaceContent();
+            Refresh();
       }
 
-      void CheckForExistingGames()
-      {
-         StreamReader r;
+        void Refresh()
+        {
+            LangueOficielleLoadPage = new List<string>();
+            ListeÉlémentsAAfficher = new List<string>();
 
-         GererDonnees.GameExists = new bool[3];
-         for (int i = 0; i < 3; ++i)
-         {
-            r = new StreamReader("../../Saves/save" + i + ".txt");
-           GererDonnees.GameExists[i] = r.ReadLine() != "";
-            r.Close();
-         }
-      }
+            InitializeComponent();
+            switch (GererDonnees.Langue)
+            {
+                case 0:
+                    LangueOficielleLoadPage = GererDonnees.ListeFrancais;
+                    tbtitre.Margin = new Thickness(-40, 13, 42, 5);
+                    BackButton.Margin = new Thickness(28, 17, 113, 52);
+                    break;
+                case 1:
+                    LangueOficielleLoadPage = GererDonnees.ListeAnglais;
+                    tbtitre.Margin = new Thickness(-30, 13, 49, 5);
+                    BackButton.Margin = new Thickness(28, 17, 113, 52);
+                    break;
+                case 2:
+                    LangueOficielleLoadPage = GererDonnees.ListeEspagnol;
+                    tbtitre.Margin = new Thickness(-40, 13, 42, 5);
+                    BackButton.Margin = new Thickness(24, 17, 118, 52);
+                    break;
+                case 3:
+                    LangueOficielleLoadPage = GererDonnees.ListeJaponais;
+                    tbtitre.Margin = new Thickness(-30, 13, 49, 5);
+                    BackButton.Margin = new Thickness(28, 17, 113, 52);
+                    break;
+
+            }
+            tbtitre.Text = LangueOficielleLoadPage[32];
+            BackButton.Text = LangueOficielleLoadPage[0];
+
+            //CheckForExistingGames();
+            PlaceContent();
+        }
 
       private void PlaceContent()
       {
@@ -115,21 +107,21 @@ namespace Launching_Interface
                image0.Source = src;
                image0.Margin = new Thickness(30);
                slotA.Text = ÉlémentFichiersLangues(2);
-               Level0.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               Level0.Text = ÉlémentFichiersLangues(4) + " " + GererDonnees.CountComplete(i) + "/" + GererDonnees.CountLevels(i).ToString();
                Time0.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
             case 1:
                image1.Source = src;
                image1.Margin = new Thickness(30);
                slotB.Text = ÉlémentFichiersLangues(5);
-               Level1.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               Level1.Text = ÉlémentFichiersLangues(4) + " " + GererDonnees.CountComplete(i) + "/" + GererDonnees.CountLevels(i).ToString();
                Time1.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
             case 2:
                image2.Source = src;
                image2.Margin = new Thickness(30);
                slotC.Text = ÉlémentFichiersLangues(8);
-               Level2.Text = ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               Level2.Text = ÉlémentFichiersLangues(4) + " " + GererDonnees.CountComplete(i) + "/" + GererDonnees.CountLevels(i).ToString();
                Time2.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
                //case 0:
@@ -154,7 +146,7 @@ namespace Launching_Interface
                //   Time2.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                //   break;
          }
-         ListeÉlémentsAAfficher.Clear();
+         //ListeÉlémentsAAfficher.Clear();
 
          OrganiserMargesDesCaractéristiques();
          RendreTexteRouge(i);
@@ -177,11 +169,25 @@ namespace Launching_Interface
                Load2Button.BorderBrush = Brushes.Red;
                break;
          }
-
-         
       }
-      
-      string ÉlémentFichiersLangues(int i)
+
+        void ChangeBorderBrushColor(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    Load0Button.BorderBrush = Brushes.Black;//DarkBlue;
+                    break;
+                case 1:
+                    Load1Button.BorderBrush = Brushes.Black;//DarkBlue;
+                    break;
+                case 2:
+                    Load2Button.BorderBrush = Brushes.Black;//DarkBlue;
+                    break;
+            }
+        }
+
+        string ÉlémentFichiersLangues(int i)
       {
          return LangueOficielleLoadPage[i].Replace("\n", string.Empty);
       }
@@ -241,6 +247,7 @@ namespace Launching_Interface
                CreateImage(Load2);
                break;
          }
+            ChangeBorderBrushColor(i);
          RéinitialiserBoutons(i);
       }
 
@@ -250,16 +257,16 @@ namespace Launching_Interface
          switch (GererDonnees.Langue)
          {
             case 0:
-               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/CreateFR.png", UriKind.Relative));
+               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/EmptyFR.png", UriKind.Relative));
                break;
             case 1:
-               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/Create.png", UriKind.Relative));
+               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/Empty.png", UriKind.Relative));
                break;
             case 2:
-               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/CreateES.png", UriKind.Relative));
+               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/EmptyES.png", UriKind.Relative));
                break;
             case 3:
-               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/CreateJA.png", UriKind.Relative));
+               e.Image.Source = new BitmapImage(new Uri(@"/Pictures/EmptyJA.png", UriKind.Relative));
                break;
          }
          e.Image.Margin = new Thickness(0, -90, 0, -350);
@@ -295,19 +302,31 @@ namespace Launching_Interface
             this.NavigationService.Navigate(new MainPage());
         }
 
-      private void Load1Button_Click(object sender, RoutedEventArgs e)
-      {
+        void DeleteSave(string saveNumber)
+        {
+            StreamWriter writer = new StreamWriter("../../Saves/save" + saveNumber + ".txt");
+            writer.WriteLine();
+            writer.Close();
+            GererDonnees.RefreshSaves();
+            image0.Source = null;
+            image1.Source = null;
+            image2.Source = null;
+            Refresh();
+        }
 
+        private void Load1Button_Click(object sender, RoutedEventArgs e)
+      {
+            DeleteSave("0");
       }
 
       private void Load2Button_Click(object sender, RoutedEventArgs e)
       {
-
-      }
+            DeleteSave("1");
+        }
 
       private void Load3Button_Click(object sender, RoutedEventArgs e)
       {
-
-      }
+            DeleteSave("2");
+        }
    }
 }
