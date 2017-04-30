@@ -32,7 +32,7 @@ namespace Launching_Interface
          GérerLangues();
          GérerRenderDistance();
          GérerSon();
-         GérerBoutons();
+       //  GérerBoutons();
          ChangerRéglages();
 
       }
@@ -226,28 +226,29 @@ namespace Launching_Interface
       private void ButFull_Unchecked(object sender, RoutedEventArgs e)
       {
          GererDonnees.FullscreenMode = 0;
-         GérerBoutons();
+       //  GérerBoutons();
+         Instructions();
 
-        
       }
 
       private void ButFull_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.FullscreenMode = 1;
-         GérerBoutons();
+      //   GérerBoutons();
+         Instructions();
       }
 
       private void ButCont_Unchecked(object sender, RoutedEventArgs e)
       {
          GererDonnees.KeyboardMode = 1;
-         GérerBoutons();
+        // GérerBoutons();
          Instructions();
       }
 
       private void ButCont_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.KeyboardMode = 0;
-         GérerBoutons();
+      //   GérerBoutons();
          Instructions();
       }
 
@@ -258,14 +259,14 @@ namespace Launching_Interface
       {
          GererDonnees.Langue = 2;
          ListeLangueOficielle = GererDonnees.ListeEspagnol;
-         
+
          ChangerRéglages();
       }
       private void RBjp_Checked(object sender, RoutedEventArgs e)
       {
          GererDonnees.Langue = 3;
          ListeLangueOficielle = GererDonnees.ListeJaponais;
-         
+
          ChangerRéglages();
       }
       private void RBfr_Checked(object sender, RoutedEventArgs e)
@@ -278,7 +279,7 @@ namespace Launching_Interface
       {
          GererDonnees.Langue = 1;
          ListeLangueOficielle = GererDonnees.ListeAnglais;
-      
+
          ChangerRéglages();
       }
 
@@ -295,15 +296,15 @@ namespace Launching_Interface
          Perfo.Text = ListeLangueOficielle[19];
          Full.Text = ListeLangueOficielle[20];
          Inp.Text = ListeLangueOficielle[21];
-         
+
          Lang.Text = ListeLangueOficielle[31];
          Resettext2.Text = ListeLangueOficielle[33];
          TitreSett.Text = ListeLangueOficielle[35];
-         menuText.Text = ListeLangueOficielle[36];         
+         menuText.Text = ListeLangueOficielle[36];
          saveText.Text = ListeLangueOficielle[37];
 
-        
-         switch(GererDonnees.Langue)
+
+         switch (GererDonnees.Langue)
          {
             case 0:
                Backtext.Margin = new Thickness(38, 19, 110, 88);
@@ -414,8 +415,6 @@ namespace Launching_Interface
 
       private void ResetButton_Click(object sender, RoutedEventArgs e)
       {
-         
-
          GererDonnees.PremierFichier = true; //nothing for commit
          GererDonnees.RD = true;
          GererDonnees.RéglagesBase();
@@ -425,7 +424,6 @@ namespace Launching_Interface
          GérerLangues();
          GérerSon();
          GérerBoutons();
-
       }
 
       void GérerSon()
@@ -516,6 +514,7 @@ namespace Launching_Interface
             textL.Text = ListeLangueOficielle[43];
             textR.Text = ListeLangueOficielle[44];
          }
+         GérerBoutons();
       }
 
       void ChangerImagesClavier()
@@ -530,43 +529,52 @@ namespace Launching_Interface
       }
 
       void ChangerMargesClavier()
-      {
-         textWASD.Margin = new Thickness(110,8,-32,-3);
-         textSpace.Margin = new Thickness(0);
-         textFleches.Margin = new Thickness(0);
+      {        
          textL.Margin = new Thickness(0);
          textR.Margin = new Thickness(0);
 
          wasd.Margin = new Thickness(50, -140, 500, -360);
-         e.Margin = new Thickness(206, -280, 250, -212);
-         p.Margin = new Thickness(165, -230, 275, -230);
-         SpaceBar.Margin = new Thickness(-40, -210, 300, -184);
-         Shift.Margin = new Thickness(166, -235, 213, -260);
-         FlèchesClavier.Margin = new Thickness(10, -28, 400, -278);
+         e.Margin = new Thickness(206, -292, 252, -233);
+         p.Margin = new Thickness(165, -130, 275, -230);
+         SpaceBar.Margin = new Thickness(-110, -130, 176,-361);
+         Shift.Margin = new Thickness(167, -230, 213, -280);
+         FlèchesClavier.Margin = new Thickness(22, -51, 420, -271);
 
-         //switch (GererDonnees.Langue)
-         //{
-         //   case 0:
-         //      textFleches.Margin = new Thickness(-17, 0, 15, 0);
-         //      textSpace.Margin = new Thickness(-22.5, 0, 20, 0);
-         //      textWASD.Margin = new Thickness(-11, 0, -10, 0);
-         //      break;
-         //   case 1:
-         //      textFleches.Margin = new Thickness(-17, 0, 15, 0);
-         //      textSpace.Margin = new Thickness(-22, 0, 24, 0);
-         //      textWASD.Margin = new Thickness(-8, 0, -8, 0);
-         //      break;
-         //   case 2:
-         //      textFleches.Margin = new Thickness(-20, 0, 5, 0);
-         //      textSpace.Margin = new Thickness(-22, 0, 23, 0);
-         //      textWASD.Margin = new Thickness(-8, 0, -8, 0);
-         //      break;
-         //   case 3:
-         //      textFleches.Margin = new Thickness(-10, 0, 5, 0);
-         //      textSpace.Margin = new Thickness(-22.5, 0, 20, 0);
-         //      textWASD.Margin = new Thickness(-8, 0, -8, 0);
-         //      break;
-         //}
+         switch (GererDonnees.Langue)
+         {
+            case 0:
+               textWASD.Margin = new Thickness(110, 8, -32, -5);
+               textP.Margin = new Thickness(80, 0, 44, 4);
+               textShift.Margin = new Thickness(80, 10, 44, -3);
+               textFleches.Margin = new Thickness(68, 7, -20, -5);
+               textSpace.Margin = new Thickness(72, 5, -11, -2);
+               textE.Margin = new Thickness(54, 0, 5.5, 4);
+               break;
+            case 1:
+               textWASD.Margin = new Thickness(90, 8, -18, -5);
+               textP.Margin = new Thickness(80, 0, 44, 4);
+               textShift.Margin = new Thickness(72, 10, 46, -3);
+               textFleches.Margin = new Thickness(77, 6.5, -24, -5);
+               textSpace.Margin = new Thickness(69, 5, -7, -2);
+               textE.Margin = new Thickness(48, 0, 10, 4);
+               break;
+            case 2:
+               textWASD.Margin = new Thickness(90, 8, -18, -5);
+               textP.Margin = new Thickness(80, 0, 44, 4);
+               textShift.Margin = new Thickness(80, 10, 44, -3);
+               textFleches.Margin = new Thickness(68, 7, -20, -5);
+               textSpace.Margin = new Thickness(72, 5, -7, -2);
+               textE.Margin = new Thickness(54, 0, 15, 4);
+               break;
+            case 3:
+               textWASD.Margin = new Thickness(90, 8, -18, -5);
+               textP.Margin = new Thickness(80, 2, 44, 4);
+               textShift.Margin = new Thickness(72, 10, 46, -3);
+               textFleches.Margin = new Thickness(55, 7, -12, -5);
+               textSpace.Margin = new Thickness(77, 5, -11, -2);
+               textE.Margin = new Thickness(38, 0, 21, 4);
+               break;
+         }
 
       }
 
@@ -582,38 +590,55 @@ namespace Launching_Interface
       }
 
       void ChangerMargesManette()
-      {
-         textWASD.Margin = new Thickness(-12, 0, -10, 0);
+      {      
          wasd.Margin = new Thickness(1900, 500, 3900, -400);
-         textL.Margin = new Thickness(8,3,10,0);
-         textR.Margin = new Thickness(6,1.5,10,-0.5);         
-         e.Margin = new Thickness(2840, 120, 5170, 420);
-         p.Margin = new Thickness(170, -30, 660, -89);
-         SpaceBar.Margin = new Thickness(2255, 910, 4050, -140);
+         e.Margin = new Thickness(2860, 100, 5120, 420);
+         p.Margin = new Thickness(130, 72, 580,-74);
+         SpaceBar.Margin = new Thickness(2255, 1720, 4050, -1300);
          Shift.Margin = new Thickness(175, 35, 370, -37);
          FlèchesClavier.Margin = new Thickness(2100, 500, 3900, -380);
 
-         switch(GererDonnees.Langue)
+         switch (GererDonnees.Langue)
          {
             case 0:
-               textFleches.Margin = new Thickness(-17, 0, 15, 0);
-               textSpace.Margin = new Thickness(-22.5, 0, 20, 0);
-               textWASD.Margin = new Thickness(-11, 0, -10, 0);
+               textFleches.Margin = new Thickness(59, 8, 0, -5);
+               textSpace.Margin = new Thickness(53, 9, 29, -2);
+               textWASD.Margin = new Thickness(67, 8, -33, -5);
+               textL.Margin = new Thickness(40, 19, 76, -4);
+               textP.Margin = new Thickness(67, -2, 50, 5);
+               textShift.Margin = new Thickness(67, 8, 45, -3);
+               textE.Margin = new Thickness(52, -1, 12, 5);
+               textR.Margin = new Thickness(44, 15, 74, -4);
                break;
             case 1:
-               textFleches.Margin = new Thickness(-17, 0, 15, 0);
-               textSpace.Margin = new Thickness(-22, 0, 24, 0);
-               textWASD.Margin = new Thickness(-8, 0, -8, 0);
+               textFleches.Margin = new Thickness(63, 8, -3, -5);
+               textSpace.Margin = new Thickness(50, 9, 29, -2);
+               textWASD.Margin = new Thickness(70, 8, 0, -5);
+               textL.Margin = new Thickness(37, 19, 71, -4);
+               textP.Margin = new Thickness(67, -2, 50, 5);
+               textShift.Margin = new Thickness(61, 8, 54, -3);
+               textE.Margin = new Thickness(50, -1, 20, 6);
+               textR.Margin = new Thickness(52, -1, 12, 6);
                break;
             case 2:
-               textFleches.Margin = new Thickness(-20, 0, 5, 0);
-               textSpace.Margin = new Thickness(-22, 0, 23, 0);
-               textWASD.Margin = new Thickness(-8, 0, -8, 0);
+               textFleches.Margin = new Thickness(78, 8, -15, -5);
+               textSpace.Margin = new Thickness(50, 9, 29, -2);
+               textWASD.Margin = new Thickness(75, 8, 0, -5);
+               textL.Margin = new Thickness(38, 19, 71, -4);
+               textP.Margin = new Thickness(67, -2, 50, 5);
+               textShift.Margin = new Thickness(67, 8, 45, -3);
+               textE.Margin = new Thickness(51.5, -1, 18, 6);
+               textR.Margin = new Thickness(52, -1, 12, 6);
                break;
             case 3:
-               textFleches.Margin = new Thickness(-10, 0, 5, 0);
-               textSpace.Margin = new Thickness(-22.5, 0, 20, 0);
-               textWASD.Margin = new Thickness(-8, 0, -8, 0);
+               textFleches.Margin = new Thickness(46, 8, 6, -5);
+               textSpace.Margin = new Thickness(53, 9, 29, -2);
+               textWASD.Margin = new Thickness(70, 8, 0, -5);
+               textL.Margin = new Thickness(51, 22, 98, -5);
+               textP.Margin = new Thickness(67, 0, 56, 6);
+               textShift.Margin = new Thickness(58, 8, 57, -3);
+               textE.Margin = new Thickness(38, -1, 27, 6);
+               textR.Margin = new Thickness(52, -1, 12, 6);
                break;
          }
 
@@ -626,6 +651,7 @@ namespace Launching_Interface
          r.Close();
          File.Copy("../../Saves/pendingsave.txt", "../../Saves/save" + n + ".txt", true);
          File.Copy("../../Saves/pendingscreenshot.png", "../../Saves/screenshot" + n + ".png", true);
+            GererDonnees.RefreshSaves();
       }
 
       void GérerBoutons()
@@ -636,9 +662,9 @@ namespace Launching_Interface
             AppliquerFondÉcran();
             ButFull.Content = ListeLangueOficielle[29];
          }
-         else 
+         else
          {
-            if(EstPremiereFoisFondÉcran == true) { EstPremiereFoisFondÉcran = false; }
+            if (EstPremiereFoisFondÉcran == true) { EstPremiereFoisFondÉcran = false; }
             RetirerDondÉcran();
             ButFull.Content = ListeLangueOficielle[30];
          }
@@ -648,7 +674,7 @@ namespace Launching_Interface
             ButCont.Content = ListeLangueOficielle[23];
             ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/keyboard.png", UriKind.Relative));
          }
-         else 
+         else
          {
             ButCont.Content = ListeLangueOficielle[22];
             ImageInstructions.Source = new BitmapImage(new Uri(@"/Pictures/Instructions/Controller2Sides.png", UriKind.Relative));
@@ -681,7 +707,7 @@ namespace Launching_Interface
       {
          Application.Current.MainWindow.Height = 750;
          Application.Current.MainWindow.Width = 1400;
-         
+
          Application.Current.MainWindow.WindowState = WindowState.Normal;
          Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
          Application.Current.MainWindow.ResizeMode = ResizeMode.CanResize;

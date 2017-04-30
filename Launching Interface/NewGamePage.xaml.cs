@@ -60,7 +60,7 @@ namespace Launching_Interface
          }
          tbtitre.Text = LangueOficielleNewPage[1];
          BackButton.Text = LangueOficielleNewPage[0];
-         CheckForExistingGames();
+      //   CheckForExistingGames();
          PlaceContent();
       }
 
@@ -117,28 +117,27 @@ namespace Launching_Interface
                image0.Source = src;
                image0.Margin = new Thickness(30);
                slotA.Text = ÉlémentFichiersLangues(2);
-               Level0.Text= ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0]+ "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               Level0.Text= ÉlémentFichiersLangues(4) + " " + GererDonnees.CountComplete(i) + "/" + GererDonnees.CountLevels(i).ToString();
                Time0.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];     
                break;
             case 1:
                image1.Source = src;
                image1.Margin = new Thickness(30);
                slotB.Text = ÉlémentFichiersLangues(5);
-               Level1.Text= ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               Level1.Text= ÉlémentFichiersLangues(4) + " " + GererDonnees.CountComplete(i) + "/" + GererDonnees.CountLevels(i).ToString();
                Time1.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
             case 2:
                image2.Source = src;
                image2.Margin = new Thickness(30);
                slotC.Text = ÉlémentFichiersLangues(8);
-               Level2.Text= ÉlémentFichiersLangues(4) + " " + ListeÉlémentsAAfficher[0] + "/" + GererDonnees.NBRE_NIVEAUX.ToString();
+               Level2.Text= ÉlémentFichiersLangues(4) + " " + /*ListeÉlémentsAAfficher[0]*/GererDonnees.CountComplete(i) + "/" + GererDonnees.CountLevels(i).ToString();
                Time2.Text = ÉlémentFichiersLangues(3) + " " + ListeÉlémentsAAfficher[3];
                break;
          }
-         ListeÉlémentsAAfficher.Clear();
 
-         OrganiserMargesDesCaractéristiques();
-         RendreBoutonsBleus(i);
+         OrganiserMargesCaractéristiques();
+         ChangeBorderBrushColor(i);
       }
 
       string ÉlémentFichiersLangues(int i)
@@ -146,79 +145,104 @@ namespace Launching_Interface
          return LangueOficielleNewPage[i].Replace("\n", string.Empty);
       }
 
-      void OrganiserMargesDesCaractéristiques()
-      {
-         Thickness margesSave =new Thickness( 0);
-         Thickness margesLevel = new Thickness(0);
+        //void OrganiserMargesDesCaractéristiques()
+        //{
+        //   Thickness margesSave =new Thickness( 0);
+        //   Thickness margesLevel = new Thickness(0);
 
-         if (GererDonnees.Langue != 0)
-         {
-            margesSave = new Thickness(20, 0, 20, 0);
-         }
-         slotA.Margin = margesSave;
-         slotB.Margin = margesSave;
-         slotC.Margin = margesSave;
-
-      
-         if (GererDonnees.Langue ==3)
-         {
-            margesLevel = new Thickness(10, 0, 10, 0);
-         }
-         Level0.Margin = margesLevel;
-         Level1.Margin = margesLevel;
-         Level2.Margin = margesLevel;
+        //   if (GererDonnees.Langue != 0)
+        //   {
+        //      margesSave = new Thickness(20, 0, 20, 0);
+        //   }
+        //   slotA.Margin = margesSave;
+        //   slotB.Margin = margesSave;
+        //   slotC.Margin = margesSave;
 
 
-      }
+        //   if (GererDonnees.Langue ==3)
+        //   {
+        //      margesLevel = new Thickness(10, 0, 10, 0);
+        //   }
+        //   Level0.Margin = margesLevel;
+        //   Level1.Margin = margesLevel;
+        //   Level2.Margin = margesLevel;
 
-      void RendreBoutonsBleus(int i)
+
+        //}
+
+        void OrganiserMargesCaractéristiques()
+        {
+            switch (GererDonnees.Langue)
+            {
+                case 0:
+                    LangueOficielleNewPage = GererDonnees.ListeFrancais;
+                    tbtitre.Margin = new Thickness(-38, 13, 43, 5);
+                    BackButton.Margin = new Thickness(36, 17, 105, 50);
+                    slotA.Margin = slotB.Margin = slotC.Margin = new Thickness(15, -11, 15, 10);
+                    Level0.Margin = Level1.Margin = Level2.Margin = new Thickness(5, -5, 5, 5);
+                    Time0.Margin = Time1.Margin = Time2.Margin = new Thickness(20, 0, 20, 0);
+
+                    break;
+                case 1:
+                    LangueOficielleNewPage = GererDonnees.ListeAnglais;
+                    tbtitre.Margin = new Thickness(-35, 13, 49, 5);
+                    BackButton.Margin = new Thickness(36, 17, 105, 50);
+                    slotA.Margin = slotB.Margin = slotC.Margin = new Thickness(33, -11, 33, 10);
+                    Level0.Margin = Level1.Margin = Level2.Margin = new Thickness(5, -5, 5, 5);
+                    Time0.Margin = Time1.Margin = Time2.Margin = new Thickness(20, 0, 20, 0);
+                    break;
+                case 2:
+                    LangueOficielleNewPage = GererDonnees.ListeEspagnol;
+                    tbtitre.Margin = new Thickness(-39, 13, 42, 5);
+                    BackButton.Margin = new Thickness(33, 17, 107, 52);
+                    slotA.Margin = slotB.Margin = slotC.Margin = new Thickness(27, -11, 27, 10);
+                    Level0.Margin = Level1.Margin = Level2.Margin = new Thickness(5, -5, 5, 5);
+                    Time0.Margin = Time1.Margin = Time2.Margin = new Thickness(20, 0, 20, 0);
+                    break;
+                case 3:
+                    LangueOficielleNewPage = GererDonnees.ListeJaponais;
+                    tbtitre.Margin = new Thickness(-41, 13, 53, 5);
+                    BackButton.Margin = new Thickness(36, 17, 105, 52);
+                    slotA.Margin = slotB.Margin = slotC.Margin = new Thickness(26, -11, 26, 10);
+                    Level0.Margin = Level1.Margin = Level2.Margin = new Thickness(14, -5, 14, 5);
+                    Time0.Margin = Time1.Margin = Time2.Margin = new Thickness(20, 0, 20, 0);
+                    break;
+
+            }
+        }
+
+      void ChangeBorderBrushColor(int i)
       {
          switch (i)
          {
             case 0:
-              // slotA.Foreground = Brushes.Blue;   
-               Save0Button.BorderBrush = Brushes.DarkBlue;
+                    Save0Button.BorderBrush = Brushes.Black;//DarkBlue;
                break;
             case 1:
-               //slotB.Foreground = Brushes.Blue;        
-               Save1Button.BorderBrush = Brushes.DarkBlue;
+                    Save1Button.BorderBrush = Brushes.Black;//DarkBlue;
                break;
             case 2:
-               //slotC.Foreground = Brushes.Blue;
-               Save2Button.BorderBrush = Brushes.DarkBlue;
+                    Save2Button.BorderBrush = Brushes.Black;//DarkBlue;
                break;
          }
-
-
       }
 
       void LireInformationsNouvellePartie(int i)
       {
-         StreamReader lecteurDonnées = new StreamReader("../../Saves/save" + i + ".txt");
-         string Lignelue = lecteurDonnées.ReadLine();
-         string[] séparateur = Lignelue.Split(new string[] { "l: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
+         switch (i)
+         {
+            case 0:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher0;
+               break;
+            case 1:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher1;
+               break;
+            case 2:
+               ListeÉlémentsAAfficher = GererDonnees.ListeCaractéristiquesAAfficher2;
+               break;
+          }
+          
 
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "n: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "n: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "d: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "e: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-
-         Lignelue = lecteurDonnées.ReadLine();
-         séparateur = Lignelue.Split(new string[] { "k: " }, StringSplitOptions.None);
-         ListeÉlémentsAAfficher.Add(séparateur[1]);
-         lecteurDonnées.Close();
       }
 
       private void PlaceCreateImage(int i)
@@ -226,16 +250,17 @@ namespace Launching_Interface
          switch (i)
          {
             case 0:
-               CreateImage(Load0);
+               CreateImage(Save0/*Load0*/);
                break;
             case 1:
-               CreateImage(Load1);
+               CreateImage(Save1/*Load1*/);
                break;
             case 2:
-               CreateImage(Load2);
+               CreateImage(Save2/*Load2*/);
                break;
          }
-         RéinitialiserBoutons(i);
+            ChangeBorderBrushColor(i);
+            RéinitialiserBoutons(i);
       }
 
       private void CreateImage(Grid l)
@@ -259,19 +284,19 @@ namespace Launching_Interface
          e.Image.Margin = new Thickness(0, -90, 0, -350);
          l.Children.Add(e);
       }
-        //nothing
-      void CheckForExistingGames()
-      {
-         StreamReader r;
 
-         GererDonnees.GameExists = new bool[3];
-         for (int i = 0; i < 3; ++i)
-         {
-            r = new StreamReader("../../Saves/save" + i + ".txt");
-           GererDonnees. GameExists[i] = r.ReadLine() != "";
-            r.Close();
-         }
-      }
+      //void CheckForExistingGames()
+      //{
+      //   StreamReader r;
+
+      //   GererDonnees.GameExists = new bool[3];
+      //   for (int i = 0; i < 3; ++i)
+      //   {
+      //      r = new StreamReader("../../Saves/save" + i + ".txt");
+      //     GererDonnees. GameExists[i] = r.ReadLine() != "";
+      //      r.Close();
+      //   }
+      //}
 
       void BackButton_Click(object sender, RoutedEventArgs e)
       {
@@ -314,7 +339,10 @@ namespace Launching_Interface
          //writer.WriteLine("World: Lobby");
          //writer.WriteLine("Percentage: 0%");
          writer.WriteLine("Time Played: " + (new TimeSpan(0, 0, 0)).ToString());
-         writer.Close();
+            writer.WriteLine("Max Life: 300");
+            writer.WriteLine("Attack: 0");
+            writer.WriteLine("false;false;false;false;false;false;false;false");
+            writer.Close();
          File.Copy("../../Saves/startscreenshot.png", "../../Saves/screenshot" + saveNumber + ".png", true);
       }
 

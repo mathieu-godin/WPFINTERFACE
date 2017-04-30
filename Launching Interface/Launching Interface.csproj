@@ -274,6 +274,11 @@
     <Resource Include="Pictures\Instructions\TouchesManette\Start_Xbox.png" />
     <Resource Include="Pictures\Instructions\TouchesManette\Stick_Xbox.png" />
     <Resource Include="Pictures\Instructions\TouchesManette\X_Xbox.png" />
+    <Resource Include="Pictures\Empty.png" />
+    <Resource Include="Pictures\EmptyES.png" />
+    <Resource Include="Pictures\EmptyFR.png" />
+    <Resource Include="Pictures\EmptyJA.png" />
+    <Resource Include="Saves\pendingsave.txt" />
     <Content Include="Saves\screenshot0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
